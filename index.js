@@ -197,3 +197,24 @@ app.put('/updateUsers/update', async (req, res) => {
       { $set: { name: name, image: image } },
       { upsert: true } 
     );
+
+     res.status(200).send({ acknowledged: true, message: "Profile updated successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "Server error", error });
+  }
+});
+
+
+
+
+app.get("/updateUsers/profile", async (req, res) => {
+  try {
+    const email = req.query.email;
+    if (!email) {
+      return res.status(400).send({ message: "Email is required" });
+    }
+    const result = await usersCollection.findOne({ email: email });
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ message: "Server error" });
+  }
