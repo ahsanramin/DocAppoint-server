@@ -178,3 +178,22 @@ async function run() {
 
         const result = await appointmentCollection.updateOne(query, updateDoc);
         res.send(result);
+         } catch (error) {
+        res.status(500).send({ message: "Failed to update" });
+      }
+    });
+
+
+
+
+
+    // PUT method update user route
+app.put('/updateUsers/update', async (req, res) => {
+  const { email, name, image } = req.body; 
+  
+  try {
+    const result = await usersCollection.updateOne(
+      { email: email }, 
+      { $set: { name: name, image: image } },
+      { upsert: true } 
+    );
