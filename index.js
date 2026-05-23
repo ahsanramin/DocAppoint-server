@@ -218,3 +218,26 @@ app.get("/updateUsers/profile", async (req, res) => {
   } catch (error) {
     res.status(500).send({ message: "Server error" });
   }
+  });
+
+
+
+
+
+
+
+    // console.log("MongoDB Connected");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+run();
+
+app.get("/", (req, res) => {
+  res.json({ message: "Server running" });
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
