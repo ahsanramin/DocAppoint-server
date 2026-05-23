@@ -58,3 +58,23 @@ const verifyToken = async (req, res, next) => {
     const { payload } = await jwtVerify(token, JWKS);
     req.user = payload;
     
+        next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Unauthorized: Invalid Token' });
+  }
+};
+
+
+
+async function run() {
+  try {
+    // await client.connect();
+
+    const db = client.db("DocAppoint");
+    const doctorCollection = db.collection("doctors");
+    const appointmentCollection = db.collection("appointments");
+    const usersCollection = db.collection("updateUsers");
+
+
+    // Get all doctors
+    app.get("/doctors", async (req, res) => {
