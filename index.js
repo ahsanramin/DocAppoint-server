@@ -18,3 +18,23 @@ const uri = process.env.MONGODB_URI;
 
 
 const JWKS = createRemoteJWKSet(
+    new URL(`${process.env.CLIENT_URL}/api/auth/jwks`)
+)
+
+
+
+
+// ✅ Middleware
+app.use(cors());
+app.use(express.json());
+
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
+
+
+const logger = (req, res, next) => {
