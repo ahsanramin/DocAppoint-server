@@ -1,70 +1,22 @@
-DocAppoint - Server
-This is the backend server for DocAppoint, a Doctor Appointment Booking System. It provides RESTful APIs for authentication, doctor management, appointment booking, and user profile handling. Built with Node.js, Express, and MongoDB, it ensures secure data exchange using JWT and supports both local and Google OAuth2 authentication.
+# DocAppoint Backend API
 
-📌 Live API Base URL
-Replace with your actual deployed server URL (e.g., Render, Railway, Vercel)
+This is the backend server for the **DocAppoint** medical and doctor appointment booking platform. It provides a robust RESTful API to manage doctors, patients, and booking functionalities. The server is built with Node.js, Express.js, and MongoDB, featuring secure JWT authentication via remote JWKS.
 
-text
-https://docappoint-server.onrender.com
-🚀 Features
-User Authentication (Local + Google OAuth)
+## 🚀 Technologies Used
 
-Registration with password validation (uppercase, lowercase, min 6 chars)
+*   **Runtime Environment:** Node.js
+*   **Web Framework:** Express.js
+*   **Database:** MongoDB (MongoDB Native Driver)
+*   **Authentication & Security:** 
+    *   `jose-cjs` (For verifying JWT tokens using remote JSON Web Key Sets - JWKS)
+    *   `cors` (Cross-Origin Resource Sharing)
+*   **Environment Management:** `dotenv`
 
-Login with JWT token generation
+## ⚙️ Environment Variables
 
-Google Sign‑In using Google Identity Services
+To run this project, you will need to add the following environment variables to your `.env` file:
 
-Protected route middleware
-
-Doctor Management
-
-Fetch all doctors with optional search by name
-
-Get single doctor details by ID
-
-Appointment Management
-
-Book a new appointment (requires authentication)
-
-Retrieve all appointments for the logged‑in user
-
-Update appointment details (patient info, date, time)
-
-Delete an appointment
-
-User Profile
-
-Get profile of authenticated user
-
-Update name and profile photo
-
-Database Seeding
-
-Pre‑defined doctor data (50+ specialists) ready to import
-
-Security
-
-Passwords hashed with bcryptjs
-
-JWT authentication with Bearer token
-
-CORS enabled
-
-Environment variables for sensitive data
-
-🛠️ Tech Stack
-Runtime: Node.js
-
-Framework: Express.js
-
-Database: MongoDB with Mongoose ODM
-
-Authentication: JSON Web Tokens (JWT), Google OAuth2 (via google-auth-library)
-
-Validation: Manual validation for registration password
-
-Logging: Morgan
-
-Environment: dotenv
-
+```env
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+CLIENT_URL=your_frontend_application_url
