@@ -78,3 +78,23 @@ async function run() {
 
     // Get all doctors
     app.get("/doctors", async (req, res) => {
+            const { search } = req.query;
+
+      let cursor;
+      if (search) {
+        cursor = doctorCollection.find({
+          $or: [
+            {
+              name: {
+                $regex: search,
+                $options: "i",
+              },
+            },
+            {
+              specialty: {
+                $regex: search,
+                $options: "i",
+              },
+            }
+          ]
+        });
