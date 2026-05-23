@@ -157,3 +157,24 @@ async function run() {
     });
 
 
+
+        //  Update appointment by ID
+    app.put("/appointments/:id", async (req, res) => {
+      try {
+        const id = req.params.id;
+        const updatedData = req.body;
+        const query = { _id: new ObjectId(id) };
+        
+        const updateDoc = {
+          $set: {
+            patientName: updatedData.patientName,
+            gender: updatedData.gender,
+            phone: updatedData.phone,
+            date: updatedData.date,
+            time: updatedData.time,
+            reason: updatedData.reason
+          }
+        };
+
+        const result = await appointmentCollection.updateOne(query, updateDoc);
+        res.send(result);
