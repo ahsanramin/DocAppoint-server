@@ -118,3 +118,23 @@ async function run() {
 
       res.send(result);
     });
+    
+
+
+  // post appointment
+  app.post("/appointments", async(req, res) =>{ 
+      const bookingData = req.body;
+      const result = await appointmentCollection.insertOne(bookingData);
+
+      res.send(result)
+    
+  })
+
+
+  // get bookings by user email
+    app.get("/my-bookings", async (req, res) => {
+      try {
+        const email = req.query.email;
+        const query = { userEmail: email };
+        const result = await appointmentCollection.find(query).toArray();
+        res.send(result);
