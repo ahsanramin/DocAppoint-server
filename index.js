@@ -98,3 +98,23 @@ async function run() {
             }
           ]
         });
+        
+      } else {
+        cursor = doctorCollection.find();
+      }
+
+
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+    //  Get single doctor
+    app.get("/doctors/:doctorId", logger, async (req, res) => {
+      const doctorId = req.params.doctorId;
+      const query = {
+        _id: new ObjectId(doctorId),
+      };
+      const result = await doctorCollection.findOne(query);
+
+      res.send(result);
+    });
