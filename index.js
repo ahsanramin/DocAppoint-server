@@ -38,3 +38,23 @@ const client = new MongoClient(uri, {
 
 
 const logger = (req, res, next) => {
+  console.log(`${req.method} | ${req.url} `)
+  next();
+
+}
+
+
+
+const verifyToken = async (req, res, next) => {
+  const authorization = req.headers.authorization || req.headers.Authorization;
+  
+  const token = authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: Missing Token' });
+  }
+
+  try {
+    const { payload } = await jwtVerify(token, JWKS);
+    req.user = payload;
+    
